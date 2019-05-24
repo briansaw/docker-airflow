@@ -146,7 +146,11 @@ Dedug Dockerfile
     Pull and Build 
     docker build --rm -t puckel/docker-airflow .
     
-Connect to running webserver docker exec -it dockerairflow_webserver_1 /bin/bash and open python interpreter:
+Connect to running webserver 
+    
+    docker exec -it dockerairflow_webserver_1 /bin/bash 
+    
+and open python interpreter:
 
     import airflow
     from airflow import models, settings
