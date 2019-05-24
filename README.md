@@ -127,5 +127,33 @@ You can also use this to run a bash shell or any other command in the same envir
 Fork, improve and PR. ;-)
 
 # BrianSaw
+Add Auth 
+    [webserver]
+    authenticate = True
+    auth_backend = airflow.contrib.auth.backends.password_auth
+Ref: https://airflow.apache.org/security.html
 
+Dedug Dockerfile
+Add
+    && pip install psycopg2 \
+    && pip install psycopg2-binary \
+Edit
+    && pip install redis>=3.2.0 \
 
+Pull and Build 
+    docker build --rm -t puckel/docker-airflow .
+    
+Connect to running webserver docker exec -it dockerairflow_webserver_1 /bin/bash and open python interpreter:
+
+import airflow
+from airflow import models, settings
+from airflow.contrib.auth.backends.password_auth import PasswordUser
+
+user = PasswordUser(models.User())
+user.username = 'new_user_name'
+user.email = 'new_user_email@example.com'
+user.password = 'set_the_password'
+session = settings.Session()
+session.add(user)
+session.commit()
+session.close()
