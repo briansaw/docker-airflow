@@ -148,7 +148,7 @@ Dedug Dockerfile
     
 Connect to running webserver 
     
-    docker exec -it dockerairflow_webserver_1 /bin/bash 
+    docker exec -it airflow_webserver_1 /bin/bash 
     
 and open python interpreter:
 
